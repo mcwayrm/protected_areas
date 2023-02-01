@@ -36,6 +36,10 @@ library(sf)
 library(tmap)
 # Making Plots 
 library(ggplot2)
+# RDD Estimations
+library(rdd)
+# Difference in Differences Estimation
+library(did)
 
 
 #######################################################
@@ -77,6 +81,13 @@ library(ggplot2)
 #######################################################
 # 03: Marina and Health Water
 #######################################################
+
+# Top Measures for Healthy Water: 
+    # Temperature > plants and algae grow in warmer waters
+    # Dissolved Oxygen (DO): microorganisms need oxygen in water to decompose organic materials
+    # pH (acdity): Healthy range is 6.5-8.5
+    # Turbidity (clarity of water): How much light passes through. Plants die if not enough light. 
+    # https://publiclab.org/notes/anngneal/12-08-2017/7-ways-to-measure-monitor-and-evaluate-water-quality
 
 # Basic OLS reg for difference in healthy water on either side
 
