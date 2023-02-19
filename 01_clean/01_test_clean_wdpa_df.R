@@ -40,9 +40,11 @@ library(tmap)
 #######################################################
 
 # Bring in raw WDPA data
-gdb <- "./data/WDPA/raw/WDPA_Jan2023_Public.gdb"
+gdb <- "../data/WDPA/raw/WDPA_Jan2023_Public.gdb"
+
 wdpa_raw <- st_read(dsn = gdb)
-                    
+           
+# Query not working         
     # Check Layers within
 #     st_layers(dsn = gdb) # Select the Polygons for the parks. 
 #         # TODO: Will need to check out the point layer to see how this is different sometime
@@ -53,17 +55,13 @@ wdpa_raw <- st_read(dsn = gdb)
 # Subset to Costa Rica 
 wdpa <- wdpa_raw[wdpa_raw$ISO3 == "CRI",]
 
-
-
-tm_shape(wdpa) + tm_borders() + tmap_options(check.and.fix = TRUE)
+# Plot
+tm_shape(wdpa) + tm_borders()
 
 
 #######################################################
 # 02: Clean Data
 #######################################################
-
-# Only keep needed variables 
-
 
 # Remove problematic observations
 # check for invalid geometries
@@ -71,7 +69,11 @@ sum(wdpa[st_is_valid(wdpa) == FALSE,])
 wdpa <- wdpa[st_is_valid(wdpa) == TRUE,]
 
 # Create generally useful information (dummies)
+wdpa$ANY_MARINE <- ifelse(wdpa$MARINE > 0, 1, 0)
 
+# Only keep needed variables 
+wdpa_tab <- wdpa[, c("WDPAID", "STATUS_YR", "ANY_MARINE")]
+wdpa_geom <- wdpa[, c("WDPAID", "SHAPE")]
 
 
 #######################################################
@@ -79,8 +81,9 @@ wdpa <- wdpa[st_is_valid(wdpa) == TRUE,]
 #######################################################
 
 # Save Tabular data 
-write.csv()
+st_write(wdpa_tab, "../data/WDPA/clean/wdpa_tab.csv")
 
 # Save Geometries 
-st_write()
+st_write(wdpa_geom, "../data/WDPA/clean/wdpa_geom.shp")
+
 
