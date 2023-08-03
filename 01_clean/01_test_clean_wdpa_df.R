@@ -56,7 +56,10 @@ wdpa_raw <- st_read(dsn = gdb)
 wdpa <- wdpa_raw[wdpa_raw$ISO3 == "CRI",]
 
 # Plot
-tm_shape(wdpa) + tm_borders()
+tm_basemap(leaflet::providers$OpenStreetMap) + 
+    tm_shape(wdpa) + 
+    tm_borders(col = "red")
+
 
 
 #######################################################
