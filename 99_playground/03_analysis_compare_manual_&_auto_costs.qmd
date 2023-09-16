@@ -1,0 +1,30 @@
+# This compares the manual cost data collection to the webscraper data collection. 
+# This flags the parks that have differences, and quantifies the accuracy of the webscraper. 
+
+
+```{python}
+# Libraries
+import geopandas as gpd # Work with shapefiles
+import pandas as pd # Work with tabular data
+import numpy as np # Work with arrays and math
+from pathlib import Path # Call local path for files
+```
+
+
+```{python}
+# TODO: Will want to cycle (loop) through each country. 
+for file in costs_folder: 
+    # Import in manual collection
+    df_manual = pd.read_file(Path('../../data/WDPA/costs/manual/costs_' + country + '_manual.csv'))
+    # Import in auto collection
+    df_generated = pd.read_file(Path('../../data/WDPA/costs/manual/costs_' + country + '_generated.csv'))
+    # Limit df_generated to only the 5% sample of parks in the df_manual 
+    df_compare = #TODO: some inner join on park IDs for generated data
+
+    # TODO: Identify differences for each park (row) in each country (file) for cost maintaince and cost establishing
+    df_compare["cost_establish_diff"] , df_compare["cost_maintaince_diff"] = generated - manual , generated - manual 
+    # TODO: Save the list of parks that differ for closer inspection
+    df_compare["flag_cost_establish"] , df_compare["flag_cost_maintaince"] = df_compare["cost_establish_diff"] != 0, df_compare["cost_maintaince_diff"] != 0 
+    # TODO: Save a calculation for each country of % accuracy
+        # TODO: Worth considering a small margin of error that is an acceptable range (say 5% off from the manual data collection)
+```
