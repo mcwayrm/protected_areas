@@ -7,7 +7,8 @@
     # Before re-running, save existing manual data collection elsewhere to copy back in after edits are made. 
 ##########
 
-# TODO: Matt, I am having some issues with running this as a .py rather than as .ipynb. 
+# TODO: .py has issue with relative paths for reading data. 
+# TODO: Need to update with the notebook. Can wait until completed before proceeding. 
 
 # Libraries
 import geopandas as gpd # Work with shapefiles
