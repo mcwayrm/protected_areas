@@ -23,7 +23,8 @@ library(tmap)
 setwd("C:/Users/ryanm/Dropbox (Personal)/Protected_Areas")
 
 # Load WDPA dataset 
-wdpa <- st_read("./data/WDPA/raw/WDPA_Jan2023_Public.gdb")
+sf_wdpa <- st_read("./data/WDPA/raw/WDPA_Jan2023_Public.gdb")
+    # TODO: Convert to a geojson
 
 # Create a tabular dataset to work with when not plotting 
 df_wdpa <- setDT(wdpa)
@@ -38,10 +39,12 @@ sumtable(df_wdpa)
 
 # We will want to remove all WDPA that are STATUS == "Not Reported" | "Proposed"
 df_wdpa <- df_wdpa[!(STATUS == "Not Reported" | STATUS == "Proposed"),] 
+    # TODO: What is the percentage of each status
 
 # Parks below resolution for analysis 
 # wdpa['GIS_AREA'] <= .3]
-
+    # TODO: What is the variation in % between the different areas
+    # TODO: Which one to use with justification.
 
 
 # Distribution of year park was established
@@ -49,7 +52,7 @@ table(df_wdpa$STATUS_YR)
 ggplot(data = subset(df_wdpa, STATUS_YR != 0)) + 
     geom_freqpoly(aes(x = STATUS_YR)) + 
     geom_vline(xintercept = mean(df_wdpa$STATUS_YR))
-
+    # TODO: Save this plot
 
 # TODO: % of parks run by government. 
 
@@ -63,3 +66,9 @@ ggplot(data = subset(df_wdpa, STATUS_YR != 0)) +
 
 # TODO: Given these are IUCN and CBD protected area definitions, add that definition into notes for the data description. 
     # TODO: Note htere is a category for park type (IUCN_CAT)
+
+
+# TODO: What is the difference points and the polygons
+
+# TODO: histogram of park size (marine vs. terresterial)
+    # TODO: Binning the type of park (s, m, l)
