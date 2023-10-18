@@ -23,8 +23,12 @@ library(tmap)
 setwd("C:/Users/ryanm/Dropbox (Personal)/Protected_Areas")
 
 # Load WDPA dataset 
-sf_wdpa <- st_read("./data/WDPA/raw/WDPA_Jan2023_Public.gdb")
-    # TODO: Convert to a geojson
+sf_wdpa <- st_read("./data/WDPA/raw/WDPA_Jan2023_Public.gdb", layer = "WDPA_poly_Jan2023")
+
+# Sources
+sources_wdpa <- st_read("./data/WDPA/raw/WDPA_Jan2023_Public.gdb", layer = "WDPA_source_Jan2023")
+unique(sources_wdpa$data_title)
+    # NOTE: These are the 365 sources for the WDPA dataset
 
 # Create a tabular dataset to work with when not plotting 
 df_wdpa <- setDT(wdpa)

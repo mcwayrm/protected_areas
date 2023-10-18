@@ -24,8 +24,13 @@ wdpa = gpd.read_file("../../data/WDPA/raw/WDPA_Jan2023_Public.gdb")
 ```
 
 ```{python}
-# Create new variable of ISO3 to desginate if a park is international (e.g., multiple ISO3 codes)
+# Create new variable of ISO3 to desginate if a park is international (e.g., multiple ISO3 codes) 
 wdpa["ISO3_Int"] = np.where(wdpa["ISO3"].str.contains(";"), "INT", wdpa["ISO3"])
+```
+
+```{python}
+# Print list of countries in WDPA dataset 
+print(set(wdpa["ISO3_Int"]))
 ```
 
 ```{python}
